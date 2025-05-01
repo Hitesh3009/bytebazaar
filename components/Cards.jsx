@@ -1,32 +1,41 @@
-import Image from 'next/image'
-import React from 'react'
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
 import { RiStarSFill } from "react-icons/ri";
 
-const Cards = ({imageHref,prodName}) => {
+const Cards = ({ imageHref, prodTitle, prodDesc, prodRating, prodPrice }) => {
     return (
-        <div>
-            <div className='rounded-tr-2xl rounded-bl-2xl w-48 h-72 lg:w-56 lg:h-[21rem] flex flex-col bg-linear-to-l from-fuchsia-500 via-purple-600 to-indigo-700'>
-                <div className='flex justify-between'>
-                    <div className='flex flex-col w-20 h-5 lg:w-28 lg:h-7 text-wrap mt-5 ml-2'>
-                        <span id="title" className='font-bold text-sm lg:text-xl'>{prodName}</span>
-                        <span id="desc" className='text-wrap text-xs lg:text-sm'>Lorem ipsum dolor sit, amet consectetur </span>
-                    </div>
-                    <div className='flex w-12 mt-5 lg:mr-2.5'>
-                        <span id="price" className='font-bold border-1 text-xs flex items-center justify-center p-1 lg:p-2 w-10 h-10 lg:w-14 lg:h-14 rounded-full bg-yellow-600 text-white'>Rs.499</span>
-                    </div>
-                </div>
-                <div className='flex justify-center mt-10 lg:mt-14'>
-                    <Image src={imageHref} width={100} height={100} alt='Tshirt Image' className='rounded-full w-28 lg:w-32'/>
-                </div>
-                <div className='my-5'>
-                    <div className='flex justify-between items-center'>
-                        <span id="rating" className='flex'><RiStarSFill className='text-2xl text-yellow-400'/>4</span>
-                        <button id='cartBtn' className='w-20 h-9 border-1 border-blue-400 bg-blue-400 text-xs rounded-3xl cursor-pointer text-white mr-1.5'>Add to cart</button>
-                    </div>
+        <div className="border-2 h-96 flex">
+            <div id="prodImage" className="bg-blue-200 h-full w-[42%] flex items-center justify-center">
+                <div className="relative w-32 h-32">
+                    <Image
+                        src={imageHref}
+                        alt="Product Image"
+                        fill
+                        className="object-contain"
+                    />
                 </div>
             </div>
+            <span className="inline-block min-h-[1em] w-0.5 self-stretch dark:bg-black/50"></span>
+            <div id='prodDetails' className='p-4 space-y-3 flex flex-col w-full'>
+                <p className='text-black text-lg font-semibold'>{prodTitle}</p>
+                <p className='text-black text-justify'>{prodDesc}</p>
+                <div className='flex justify-between items-center grow'>
+                <p className='flex items-center'><RiStarSFill className='text-3xl text-yellow-400'/>{prodRating}</p>
+                <p>{prodPrice}</p>
+                </div>
+                <div className='flex justify-between'>
+                    <button id="addToCart" className='bg-green-600 p-2 rounded-lg text-white cursor-pointer'>
+                        Add To Cart
+                    </button>
+                    <button id="addToCart" className='bg-blue-600 p-2 rounded-lg text-white cursor-pointer'>
+                        <Link href={`/checkProduct/${prodTitle}`}>Check Product</Link>
+                    </button>
+                </div>
+            </div>
+            
         </div>
-    )
-}
+    );
+};
 
-export default Cards
+export default Cards;
